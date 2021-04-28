@@ -1,13 +1,56 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css";
+import axios from 'axios'
+import NasaDay from "./NasaDay";
 
-function App() {
+
+
+function App(props) {
+const [data,setData] = useState([])
+const [isOn,setOn] = useState('false')
+
+
+
+
+
+useEffect(() => {
+  if(isOn === 'true') {
+  axios.get(`https://api.nasa.gov/planetary/apod?api_key=dQQ7bW4jrNnfGfLBeXHb2dUNYqhmItgAwYwTPUkv`)
+    .then((response) => {
+      setData(response.data)
+    }) } {}
+  } , [isOn]);
+
+
+
+
+
+function HandleClick ()  {
+  const navDisplay = document.querySelector('.BTN')
+  navDisplay.classList.toggle('displayOn')
+  setOn('true')
+  setData([])
+}
+
+
+function HandleClicker ()  {
+  const navDisplay = document.querySelector('.NasaDay')
+  const closeBTN = document.querySelector('.BTN')
+  navDisplay.classList.toggle('displayOff')
+  closeBTN.classList.toggle('displayOff')
+  const thanks = document.querySelector('.thanks')
+  thanks.classList.toggle('displayOn')
+  setOn('false')
+}
+
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      <div className="nav"><h1>How awesome is NASA?</h1></div>
+      <button onClick = {HandleClick}>Let's See</button>
+      
+      <NasaDay date={data.date}  explanation={data.explanation}  title={data.title} url={data.url} /> 
+      <button className="BTN" onClick = {HandleClicker}>Close</button>
+      <div className="thanks"><h1>Thank you for supporting NASA!</h1></div>
     </div>
   );
 }
