@@ -47,8 +47,7 @@ function HandleClicker ()  {
     <div className="App">
       <div className="nav"><h1>How awesome is NASA?</h1></div>
       <button onClick = {HandleClick}>Let's See</button>
-      
-      <NasaDay date={data.date}  explanation={data.explanation}  title={data.title} url={data.url} /> 
+      <NasaDay data={data} /> 
       <button className="BTN" onClick = {HandleClicker}>Close</button>
       <div className="thanks"><h1>Thank you for supporting NASA!</h1></div>
     </div>
